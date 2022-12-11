@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Common/Resources/TitleFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Common/Scripts/HomeScreen.cs" type="Script" id=2]
+[ext_resource path="res://Common/Resources/Little.tres" type="DynamicFont" id=3]
+
+[node name="HomeScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+custom_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_top = 245.0
+margin_right = 324.0
+margin_bottom = 304.0
+custom_fonts/font = ExtResource( 1 )
+text = "ProtoRocket"
+align = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+margin_top = 314.0
+margin_right = 324.0
+margin_bottom = 334.0
+custom_fonts/font = ExtResource( 3 )
+text = "Prototypes of various rocket-related simulations"
+align = 1
+
+[node name="Spacer" type="Control" parent="VBoxContainer"]
+margin_top = 344.0
+margin_right = 324.0
+margin_bottom = 344.0
+
+[node name="Prototypes" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 354.0
+margin_right = 324.0
+margin_bottom = 354.0
+alignment = 1

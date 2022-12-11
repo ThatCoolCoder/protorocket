@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Gravity/Planet.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Gravity/GravityManager.tscn" type="PackedScene" id=2]
+
+[node name="Gravity" type="Node2D"]
+
+[node name="Planet1" parent="." instance=ExtResource( 1 )]
+position = Vector2( 446, 252 )
+Color = Color( 0.843137, 0.8, 0.145098, 1 )
+Radius = 100.0
+Density = 2.5
+
+[node name="Planet2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 686, 250 )
+linear_velocity = Vector2( 0, 300 )
+Color = Color( 0.243137, 0.52549, 0.184314, 1 )
+Radius = 5.0
+Density = 2.5
+
+[node name="GravityManager" parent="." instance=ExtResource( 2 )]
+GravitationalConstant = 5.0
