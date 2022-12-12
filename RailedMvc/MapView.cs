@@ -14,6 +14,7 @@ public class MapView : Node2D
 	[Export] public float ViewScale = 1e-10f; // size in pixels = size in sim * scale
 	[Export] public Vector2 WorldSpacePan = Vector2.Zero;
 	[Export] public float CameraSpacePanSpeed = 500;
+	[Export] public float TimeWarp = 1;
 
 	private PackedScene planetScene = ResourceLoader.Load<PackedScene>("res://RailedMvc/Planet.tscn");
 
@@ -64,18 +65,13 @@ public class MapView : Node2D
 
 	public override void _Process(float delta)
 	{
-		KeyboardPan(delta);
+		ChangeTimeWarp();
 	}
 
-	private void KeyboardPan(float delta)
+	private void ChangeTimeWarp()
 	{
-		var speed = Vector2.Zero;
-		if (Input.IsActionPressed("left")) speed.x -= CameraSpacePanSpeed;
-		if (Input.IsActionPressed("right")) speed.x += CameraSpacePanSpeed;
-		if (Input.IsActionPressed("up")) speed.y -= CameraSpacePanSpeed;
-		if (Input.IsActionPressed("down")) speed.y += CameraSpacePanSpeed;
-		var scaledSpeed = speed / ViewScale;
-		WorldSpacePan += scaledSpeed * delta;
+		if (Input.IsActionJustPressed("left")) TimeWarp /= 10;
+		if (Input.IsActionJustPressed("right")) TimeWarp *= 10;
 	}
 
 	public override void _Input(InputEvent inputEvent)

@@ -37,8 +37,7 @@ public class Planet : StaticBody2D
 
     public override void _PhysicsProcess(float delta)
     {
-        var weirdDelta = delta * 60 * 60 * 24;
-        body.Update(weirdDelta);
+        body.Update(delta * mapView.TimeWarp);
     }
 
     public void UpdateRadius()
