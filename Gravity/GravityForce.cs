@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+namespace Gravity;
+
 public class GravityForce : Node2D
 {
 	[Export] public NodePath TargetPath;

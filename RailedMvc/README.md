@@ -1,0 +1,1 @@
+Prototype testing planets on rails, an MVC approach, and a map view. Will probably transform into a prototype that also tests persistence, or maybe that will be separate.

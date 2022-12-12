@@ -2,6 +2,8 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+namespace Gravity;
+
 public class GravityManager : Node2D
 {
 	[Export] public float GravitationalConstant = 6.67e-11f; // this is rounded to 0 in the editor UI but it remains at the correct value

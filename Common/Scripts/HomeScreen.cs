@@ -5,7 +5,8 @@ public class HomeScreen : Control
 {
 	private Prototype[] prototypes =
 	{
-		new("Basic Gravity", "res://Gravity/Gravity.tscn")
+		new("Basic Gravity", "res://Gravity/Gravity.tscn"),
+		new("Railed MVC", "res://RailedMvc/RailedMvc.tscn")
 	};
 
 	private PackedScene prototypeButton = ResourceLoader.Load<PackedScene>("res://Common/Scenes/PrototypeButton.tscn");

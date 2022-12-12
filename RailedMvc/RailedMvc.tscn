@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://RailedMvc/MapView.cs" type="Script" id=1]
+
+[node name="RailedMvc" type="Node2D" groups=["MapView"]]
+script = ExtResource( 1 )

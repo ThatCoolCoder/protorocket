@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+namespace Gravity;
+
 public class Planet : RigidBody2D
 {
 	[Export] public string PlanetName;
