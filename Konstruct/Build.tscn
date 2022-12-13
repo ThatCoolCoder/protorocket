@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Common/Resources/Little.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Konstruct/Build.cs" type="Script" id=2]
+
+[node name="Build" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 511, 298 )
+zoom = Vector2( 2, 2 )
+
+[node name="Rocket" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PartButtons" type="HBoxContainer" parent="CanvasLayer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+alignment = 1
+
+[node name="FlyButton" type="Button" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -34.0
+margin_bottom = 20.0
+grow_horizontal = 0
+custom_fonts/font = ExtResource( 1 )
+text = "Fly!"
