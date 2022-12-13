@@ -15,16 +15,14 @@ public class OrbitingCelestialBody : CelestialBody
         // Orbit!
 
         var distanceTravelled = GetOrbitalSpeed() * delta;
-        var angleChange = distanceTravelled / OrbitalPosition.GetOrbitalCircumference() * Mathf.Tau;
-
-        if (!OrbitalPosition.Clockwise) angleChange = -angleChange;
-        OrbitalPosition.PhaseAngle += angleChange;
+        if (!OrbitalPosition.Clockwise) distanceTravelled = -distanceTravelled;
+        OrbitalPosition.OrbitalDistance += distanceTravelled;
     }
 
     public float GetOrbitalSpeed()
     {
         var numerator = GravitationalConstant * OrbitCenter.Mass;
-        return Mathf.Sqrt(numerator / OrbitalPosition.OrbitalRadius);
+        return (float)Math.Sqrt(numerator / OrbitalPosition.OrbitalRadius);
     }
 
     public override Vector2 GetRelativePosition()

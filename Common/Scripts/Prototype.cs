@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+namespace Common;
+
 public class Prototype
 {
     public string Name = "";

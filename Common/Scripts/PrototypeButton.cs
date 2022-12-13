@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+namespace Common;
+
 public class PrototypeButton : Button
 {
 	public Prototype Prototype;

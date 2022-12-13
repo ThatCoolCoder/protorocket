@@ -16,7 +16,12 @@ public class MapView : Node2D
 	[Export] public float CameraSpacePanSpeed = 500;
 	[Export] public float TimeWarp = 1;
 
+	private Vector2? focusLastWorldPosition = null;
+	private CelestialBody focusedBody = null;
 	private PackedScene planetScene = ResourceLoader.Load<PackedScene>("res://RailedMvc/Planet.tscn");
+
+	private Label timeWarpLabel;
+	private Label focusLabel;
 
 	public override void _Ready()
 	{
@@ -36,6 +41,7 @@ public class MapView : Node2D
 			OrbitCenter = sun,
 			OrbitalPosition = new OrbitalPosition
 			{
+				Clockwise = false,
 				OrbitalRadius = 1.496e11f
 			}
 		};
@@ -48,6 +54,7 @@ public class MapView : Node2D
 			OrbitCenter = earth,
 			OrbitalPosition = new OrbitalPosition
 			{
+				Clockwise = false,
 				OrbitalRadius = 384400 * 1000
 			}
 		};
@@ -61,17 +68,44 @@ public class MapView : Node2D
 		}
 
 		WorldSpacePan = -ViewToWorldPos(GetViewportRect().Size / 2);
+
+		timeWarpLabel = GetNode<Label>("CanvasLayer/TimeWarpLabel");
+		focusLabel = GetNode<Label>("CanvasLayer/FocusLabel");
 	}
 
 	public override void _Process(float delta)
 	{
 		ChangeTimeWarp();
+		PanToFocusedBody();
+		UpdateUI();
 	}
 
 	private void ChangeTimeWarp()
 	{
 		if (Input.IsActionJustPressed("left")) TimeWarp /= 10;
 		if (Input.IsActionJustPressed("right")) TimeWarp *= 10;
+	}
+
+	private void PanToFocusedBody()
+	{
+		if (focusedBody != null)
+		{
+			var currentPosition = focusedBody.GetGlobalPosition();
+			if (focusLastWorldPosition != null)
+			{
+				var delta = currentPosition - (Vector2)focusLastWorldPosition;
+				WorldSpacePan += delta;
+			}
+			focusLastWorldPosition = currentPosition;
+
+		}
+	}
+
+	private void UpdateUI()
+	{
+		var focusName = focusedBody?.Name ?? "None";
+		timeWarpLabel.Text = $"Simulation speed: {TimeWarp}x";
+		focusLabel.Text = $"Map focus: {focusName}";
 	}
 
 	public override void _Input(InputEvent inputEvent)
@@ -102,11 +136,32 @@ public class MapView : Node2D
 
 	public Vector2 WorldToViewPos(Vector2 worldPos)
 	{
+		// Convert a world-space position into a view-space one
+
 		return (worldPos - WorldSpacePan) * ViewScale;
 	}
 
 	public Vector2 ViewToWorldPos(Vector2 viewPos)
 	{
+		// Convert a view-space position into a world-space one
+
 		return (viewPos / ViewScale) + WorldSpacePan;
+	}
+
+	public void SetFocus(CelestialBody body)
+	{
+		// Set the focus of the map to a specific body.
+		// Doing this means that the map pans automatically as the body moves.
+
+		focusedBody = body;
+		focusLastWorldPosition = null;
+	}
+
+	public void ReleaseFocus()
+	{
+		// Unfocus the focused body
+
+		focusedBody = null;
+		focusLastWorldPosition = null;
 	}
 }
